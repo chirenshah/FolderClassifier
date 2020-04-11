@@ -2,6 +2,8 @@ import os
 import shutil
 import sys
 import argparse
+import re
+import random
 
 def get_download_folder():
         home = os.path.expanduser("~")
@@ -22,6 +24,15 @@ def systemArgument():
     else:
         move() 
     
+def ifexist(element):
+    video_formats = ["mp4","mpg","flv","avi","3gp","wmv","mov","qt"]
+    for ext in video_formats:
+        if(element.endswith("."+ext)):
+            print("hi"+element)
+            return True
+        else:
+            return False
+
 
 def move(folder = get_download_folder()):
 
@@ -31,19 +42,42 @@ def move(folder = get_download_folder()):
         if(file.endswith(".pdf")):
             if(not os.path.exists(folder + "\Pdfs")):
                 os.mkdir(folder + "\Pdfs")
-            shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Pdfs"))
+            try:
+                shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Pdfs"))
+            except:
+                shutil.move("{}/{}({})".format(folder, file,random.randrange(0,10)),"{}/{}".format(folder,"Pdfs"))
+
         if(file.endswith(".exe")):
             if(not os.path.exists(folder + "\Setups")):
                 os.mkdir(folder + "\Setups")
-            shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Setups"))
+            try:
+                shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Setups"))
+            except:
+                shutil.move("{}/{}({})".format(folder, file,random.randrange(0,10)),"{}/{}".format(folder,"Setups"))
+
         if(file.endswith(".torrent")):
             if(not os.path.exists(folder + "\Torrents")):
                 os.mkdir(folder + "\Torrent")
-            shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Torrent"))
+            try:
+                shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Torrents"))
+            except:
+                shutil.move("{}/{}({})".format(folder, file,random.randrange(0,10)),"{}/{}".format(folder,"Torrents"))
+
         if(file.endswith(".jpg") or file.endswith(".png") or file.endswith(".jpeg")):
             if(not os.path.exists(folder + "\Images")):
                 os.mkdir(folder + "\Images")
-            shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Images"))
+            try:
+                shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Images"))
+            except:
+                shutil.move("{}/{}({})".format(folder, file,random.randrange(0,10)),"{}/{}".format(folder,"Images"))
+
+        if(ifexist(file)):
+            if(not os.path.exists(folder + "\Video")):
+                os.mkdir(folder + "\Video")
+            try:
+                shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Video"))
+            except:
+                shutil.move("{}/{}({})".format(folder, file,random.randrange(0,10)),"{}/{}".format(folder,"Video"))   
         
 if __name__ == "__main__":
     systemArgument()
