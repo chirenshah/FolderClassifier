@@ -78,6 +78,20 @@ def move(folder = get_download_folder()):
                 shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Video"))
             except:
                 shutil.move("{}/{}({})".format(folder, file,random.randrange(0,10)),"{}/{}".format(folder,"Video"))   
+        if(file.endswith(".zip")):
+            if(not os.path.exists(folder + "\Zipfile")):
+                os.mkdir(folder + "\Zipfile")
+            try:
+                shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Zipfile"))
+            except:
+                shutil.move("{}/{}({})".format(folder, file,random.randrange(0,10)),"{}/{}".format(folder,"Zipfile"))
+        if(file.endswith(".xls") or file.endswith(".txt")):
+            if(not os.path.exists(folder + "\Textfiles")):
+                os.mkdir(folder + "\Textfiles")
+            try:
+                shutil.move("{}/{}".format(folder, file),"{}/{}".format(folder,"Textfiles"))
+            except:
+                shutil.move("{}/{}({})".format(folder, file,random.randrange(0,10)),"{}/{}".format(folder,"Textfiles"))   
         
 if __name__ == "__main__":
     systemArgument()
